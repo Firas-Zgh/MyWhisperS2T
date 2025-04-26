@@ -10,8 +10,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . /app
 
-# Install Python dependencies with CPU-compatible torch
+# Upgrade pip and install dependencies
+RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir torch==2.1.2 --index-url https://download.pytorch.org/whl/cpu
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir flask
+RUN pip install --no-cache-dir whispers2t
 
 CMD ["python", "app.py"]
