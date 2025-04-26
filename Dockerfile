@@ -7,13 +7,17 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+# Create app directory
 WORKDIR /app
 COPY . /app
 
-# Upgrade pip and install dependencies
-#RUN pip install --no-cache-dir --upgrade pip
-#RUN pip install --no-cache-dir torch==2.1.2 --index-url https://download.pytorch.org/whl/cpu
-#RUN pip install --no-cache-dir flask
-#RUN pip install --no-cache-dir whispers2t
+# Upgrade pip
+RUN pip install --no-cache-dir --upgrade pip
+
+# Install CPU-compatible torch first
+RUN pip install --no-cache-dir torch==2.1.2 --index-url https://download.pytorch.org/whl/cpu
+
+# Install rest of dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["python", "app.py"]
