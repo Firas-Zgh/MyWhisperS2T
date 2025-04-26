@@ -14,6 +14,8 @@ COPY . /app
 # Upgrade pip
 RUN pip install --no-cache-dir --upgrade pip
 
+RUN pip install --no-cache-dir flask
+
 # Install CPU-compatible torch first
 RUN pip install --no-cache-dir torch==2.1.2 --index-url https://download.pytorch.org/whl/cpu
 
