@@ -3,7 +3,7 @@ from whispers2t import WhisperS2T
 import os
 
 app = Flask(__name__)
-model = WhisperS2T(model_name="tiny")  # Use tiny model for Railway
+model = WhisperS2T(model_name="tiny")
 
 @app.route("/transcribe", methods=["POST"])
 def transcribe():
